@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel ocen – szkoła Roblox</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #57F287, #1e1f22);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: #1e1f22;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      color: #fff;
+    }
+
+    h2 { text-align: center; }
+
+    .back {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: none;
+      background: #313338;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    label {
+      margin-top: 12px;
+      display: block;
+      color: #b5bac1;
+      font-size: 14px;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: none;
+      background: #2b2d31;
+      color: #fff;
+    }
+
+    button.send {
+      margin-top: 18px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      background: #57F287;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h2>📝 Panel ocen</h2>
+
+      <button class="back" onclick="location.href='index.html'">
+        ⬅ Powrót do menu
+      </button>
+
+      <label>Klasa</label>
+      <select id="klasa">
+        <option>6a</option><option>6b</option>
+        <option>7a</option><option>7b</option>
+        <option>8a</option><option>8b</option>
+      </select>
+
+      <label>Imię i nazwisko</label>
+      <input id="imienazwisko">
+
+      <label>Nick Roblox</label>
+      <input id="nick">
+
+      <label>Przedmiot</label>
+      <input id="subject">
+
+      <label>Ocena</label>
+      <select id="grade">
+        <option>1</option><option>1+</option>
+        <option>2-</option><option>2</option><option>2+</option>
+        <option>3-</option><option>3</option><option>3+</option>
+        <option>4-</option><option>4</option><option>4+</option>
+        <option>5-</option><option>5</option><option>5+</option>
+        <option>6</option>
+        <option>+</option><option>-</option>
+        <option>nieobecność</option>
+        <option>nieprzygotowany</option>
+      </select>
+
+      <label>Nauczyciel</label>
+      <input id="teacher">
+
+      <label>Komentarz</label>
+      <textarea id="comment"></textarea>
+
+      <button class="send" onclick="send()">✅ Wyślij ocenę</button>
+    </div>
+  </div>
+
+  <script>
+    // Webhook wstawiony
+    const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1449858057378074796/IUrnD2pbOXg_V7Mb4KjByyfsHmktdlglo89MTXDOnPs_hnvb0b8bpnVKWHh6jndXw7CK";
+
+    function send() {
+      const payload = {
+        embeds: [{
+          title: "📘 Dziennik szkolny – nowa ocena",
+          description: "Poniżej znajdują się szczegóły wystawionej oceny.",
+          color: 0x57F287,
+          author: {
+            name: "Szkoła Podstawowa nr 4",
+            icon_url: "https://media.discordapp.net/attachments/1446975347974344836/1449864758273507591/Gemini_Generated_Image_ryomburyomburyom-removebg-preview_4.png?ex=69407347&is=693f21c7&hm=e3f2cedf7fc94fa1526e14d4c0dd7b977e96b99adba321559d69e5570b6aec9d&=&format=webp&quality=lossless&width=605&height=644"
+          },
+          thumbnail: {
+            url: "https://media.discordapp.net/attachments/1446975347974344836/1449864758273507591/Gemini_Generated_Image_ryomburyomburyom-removebg-preview_4.png?ex=69407347&is=693f21c7&hm=e3f2cedf7fc94fa1526e14d4c0dd7b977e96b99adba321559d69e5570b6aec9d&=&format=webp&quality=lossless&width=605&height=644"
+          },
+          fields: [
+            { name: "👤 Uczeń", value: document.getElementById('imienazwisko').value || "-", inline: true },
+            { name: "🎮 Nick Roblox", value: document.getElementById('nick').value || "-", inline: true },
+            { name: "🏫 Klasa", value: document.getElementById('klasa').value, inline: true },
+            { name: "📚 Przedmiot", value: document.getElementById('subject').value || "-", inline: true },
+            { name: "⭐ Ocena", value: `**${document.getElementById('grade').value}**`, inline: true },
+            { name: "👨‍🏫 Nauczyciel", value: document.getElementById('teacher').value || "-", inline: true },
+            { name: "📝 Komentarz", value: document.getElementById('comment').value || "Brak" }
+          ],
+          footer: {
+            text: "System ocen • Szkoła Podstawowa nr 4"
+          },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        alert('✅ Ocena wysłana');
+      })
+      .catch(err => alert('❌ Błąd wysyłania: ' + err.message));
+    }
+  </script>
+</body>
+</html>

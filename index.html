@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel administracyjny – szkoła Roblox</title>
+  <link rel="icon" href="https://media.discordapp.net/attachments/1446975347974344836/1449864758273507591/Gemini_Generated_Image_ryomburyomburyom-removebg-preview_4.png?ex=69407347&is=693f21c7&hm=e3f2cedf7fc94fa1526e14d4c0dd7b977e96b99adba321559d69e5570b6aec9d&=&format=webp&quality=lossless&width=605&height=644" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #5865F2, #1e1f22);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: #1e1f22;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+      color: #fff;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    }
+
+    .btn-zastepstwa {
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      color: #fff;
+    }
+
+    .btn-oceny {
+      background: linear-gradient(135deg, #57F287, #3ba55d);
+      color: #000;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      opacity: 0.95;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #9da1a8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Panel administracyjny szkoły</h1>
+
+    <button class="btn btn-zastepstwa" onclick="location.href='zastepstwa.html'">
+      📚 Panel zastępstw
+    </button>
+
+    <button class="btn btn-oceny" onclick="location.href='oceny.html'">
+      📝 Panel ocen
+    </button>
+
+    <footer>
+      Szkoła Roblox • Administracja
+    </footer>
+  </div>
+</body>
+</html>
